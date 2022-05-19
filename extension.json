@@ -1,0 +1,44 @@
+{
+	"name": "Wywatermark",
+	"version": "0.1.0",
+	"author": [
+		"Xhlgr"
+	],
+	"url": "https://github.com/xhlgr/mediawiki-Wywatermark",
+	"descriptionmsg": "wywatermark-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"AutoloadClasses": {
+		"WywatermarkHooks": "includes/WywatermarkHooks.php"
+	},
+	"Hooks": {
+		"UploadComplete": "WywatermarkHooks::onUploadComplete",
+		"UploadForm:initial": "WywatermarkHooks::onUploadForm_initial"
+	},
+	"config": {
+	    "WywatermarkText": {
+			"description": "The text array in text watermark.",
+			"value": []
+		}
+	},
+	"MessagesDirs": {
+		"Wywatermark": [
+			"i18n"
+		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "Wywatermarkl/resources"
+	},
+	"ResourceModules": {
+		"ext.wywatermark": {
+		    "styles": ["wywatermark.css"],
+			"scripts": ["wywatermark.js"],
+			"targets": ["desktop","mobile"]
+		}
+	},
+	"manifest_version": 2
+}
