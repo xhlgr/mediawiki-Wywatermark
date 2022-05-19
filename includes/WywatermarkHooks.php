@@ -8,8 +8,8 @@ class WywatermarkHooks {
 	public static function onUploadForm_initial($uploadFormObj) {
 	    global $wgWywatermarkText;//传入文字水印文本参数
         //wfMessage( '加水印' )->text()用i18n语言
-		//构造水印设置表单，加在“摘要”后面
-		//图片水印位置
+        //构造水印设置表单，加在“摘要”后面
+        //图片水印位置
         $wmtext=Html::openElement( 'tr' ) .
         Html::openElement( 'td', ['class'=>'mw-label'] ) .
         Html::label( wfMessage( 'wywatermark-wmpos-label' )->text(), 'wmpos' ) .
@@ -83,7 +83,7 @@ class WywatermarkHooks {
         Html::rawElement( 'input', ['id'=>'wmstrstyle','name'=>'wmstrstyle','value'=>'3,0.1,-45,120'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmstrstyle-span' ) ) .
         Html::closeElement( 'td' ) . Html::closeElement( 'tr' );
-		//添加内容到摘要后面
+        //添加内容到摘要后面
         $uploadFormObj->uploadFormTextAfterSummary = $wmtext;
     }
     
@@ -201,7 +201,7 @@ class WywatermarkHooks {
             $draw->setFontSize($fontsize);
             $draw->setFillAlpha($fillalpha);
             $strwidth=$fontsize*mb_strlen($wmstrtext)*$strwidthpc/100;//按字文本宽度百分比计算间距
-			//循环加文字水印
+            //循环加文字水印
             for($x=$imageWH['width']/20;$x<$imageWH['width'];$x+=$strwidth){//从宽度1/20处开始
                 for($y=$fontsize*mb_strlen($wmstrtext);$y<$imageWH['height'];$y+=$strwidth){//从等于文本宽度的高度开始
                     $img->annotateImage($draw, $x, $y, $rotate, $wmstrtext);
