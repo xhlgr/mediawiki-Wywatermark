@@ -27,6 +27,7 @@ class WywatermarkHooks {
         Html::rawElement( 'option',['value'=>'wmposse'], wfMessage( 'wywatermark-wmposse-option' ) ) .
         Html::closeElement( 'select' ).
         Html::closeElement( 'td' ) . Html::closeElement( 'tr' );
+        
         //图片水印边距
         $wmtext.=Html::openElement( 'tr' ) .
         Html::openElement( 'td', ['class'=>'mw-label'] ) .
@@ -35,6 +36,7 @@ class WywatermarkHooks {
         Html::rawElement( 'input', ['id'=>'wmbordertext','name'=>'wmbordertext','value'=>'20'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmborder-span' ) ) .
         Html::closeElement( 'td' ) . Html::closeElement( 'tr' );
+        
         //图片水印不透明度
         $wmtext.=Html::openElement( 'tr' ) .
         Html::openElement( 'td', ['class'=>'mw-label'] ) .
@@ -43,6 +45,7 @@ class WywatermarkHooks {
         Html::rawElement( 'input', ['id'=>'wmopacitytext','name'=>'wmopacitytext','value'=>'100'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmopacity-span' ) ) .
         Html::closeElement( 'td' ) . Html::closeElement( 'tr' );
+        
         //图片水印文件名
         $wmtext.=Html::openElement( 'tr' ) .
         Html::openElement( 'td', ['class'=>'mw-label'] ) .
@@ -59,6 +62,7 @@ class WywatermarkHooks {
         }
         $wmtext.=Html::closeElement( 'select' ).
         Html::closeElement( 'td' ) . Html::closeElement( 'tr' );
+        
         //文字水印文本
         $wmtext.=Html::openElement( 'tr' ) .
         Html::openElement( 'td', ['class'=>'mw-label'] ) .
@@ -66,7 +70,7 @@ class WywatermarkHooks {
         Html::closeElement( 'td' ) . Html::openElement( 'td' ) .
         Html::openElement( 'select',['id'=>'wmstr','name'=>'wmstr'] ).
         Html::rawElement( 'option',['value'=>'wmstrunuse'], wfMessage( 'wywatermark-wmstrunuse-option' ) );
-        foreach ($wgWywatermarkText as &$value){//遍历参数输入的文本数组
+        foreach ($wgWywatermarkText as $value){//遍历参数输入的文本数组
             $wmtext.=Html::rawElement( 'option',['value'=>$value], $value );
         }
         $wmtext.=Html::rawElement( 'option',['value'=>'wmstrusername'], wfMessage( 'wywatermark-wmstrusername-option' ) ) .
@@ -75,6 +79,7 @@ class WywatermarkHooks {
         Html::rawElement( 'input', ['id'=>'wmstrinputtext','name'=>'wmstrinputtext','value'=>''] ) .
         Html::closeElement( 'td' ) . Html::closeElement( 'tr' );
         //没有找到前端显示用户名的函数，暂时显示“上传者用户名”
+        
         //文字水印样式配置（字体大小相对图片宽度百分比,透明度,旋转角度,文本间距相对文本宽度百分比）
         $wmtext.=Html::openElement( 'tr' ) .
         Html::openElement( 'td', ['class'=>'mw-label'] ) .
@@ -83,8 +88,10 @@ class WywatermarkHooks {
         Html::rawElement( 'input', ['id'=>'wmstrstyle','name'=>'wmstrstyle','value'=>'3,0.1,-45,120'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmstrstyle-span' ) ) .
         Html::closeElement( 'td' ) . Html::closeElement( 'tr' );
-        //添加内容到摘要后面
+        
+        //添加html到摘要后面
         $uploadFormObj->uploadFormTextAfterSummary = $wmtext;
+        
     }
     
 	public static function onUploadComplete($image) {
@@ -200,10 +207,10 @@ class WywatermarkHooks {
             $fontsize=$imageWH['width']*$fontsizepc/100;//按宽度百分比设置字体大小
             $draw->setFontSize($fontsize);
             $draw->setFillAlpha($fillalpha);
-            $strwidth=$fontsize*mb_strlen($wmstrtext)*$strwidthpc/100;//按字文本宽度百分比计算间距
-            //循环加文字水印
-            for($x=$imageWH['width']/20;$x<$imageWH['width'];$x+=$strwidth){//从宽度1/20处开始
-                for($y=$fontsize*mb_strlen($wmstrtext);$y<$imageWH['height'];$y+=$strwidth){//从等于文本宽度的高度开始
+            $strwidth=$fontsize*mb_strlen($wmstrtext)*$strwidthpc/100;//按字体文本宽度百分比计算间距
+            //循环加文字水印，x从宽度1/20处开始，y从等于文本宽度的高度开始
+            for($x=$imageWH['width']/20;$x<$imageWH['width'];$x+=$strwidth){
+                for($y=$fontsize*mb_strlen($wmstrtext);$y<$imageWH['height'];$y+=$strwidth){
                     $img->annotateImage($draw, $x, $y, $rotate, $wmstrtext);
                 }
             }
