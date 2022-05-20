@@ -16,9 +16,14 @@
 	},
 	"Hooks": {
 		"UploadComplete": "WywatermarkHooks::onUploadComplete",
-		"UploadForm:initial": "WywatermarkHooks::onUploadForm_initial"
+		"UploadForm:initial": "WywatermarkHooks::onUploadForm_initial",
+		"FileUpload": "WywatermarkHooks::onFileUpload"
 	},
 	"config": {
+	    "WywatermarkCat": {
+			"description": "The image watermark's category.",
+			"value": "水印"
+		},
 	    "WywatermarkText": {
 			"description": "The text array in text watermark.",
 			"value": []
