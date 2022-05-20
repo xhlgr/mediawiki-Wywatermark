@@ -17,6 +17,7 @@
   "wywatermark-wmopacity-span":"%(0 to 100)",
   "wywatermark-wmfile-label":"WM file:",
   "wywatermark-wmfilepc-span":"%(The real size percentage of watermark image)",
+  "wywatermark-wmfilepcafter-span":"View the watermark image",
   "wywatermark-wmstr-label":"String WM:",
   "wywatermark-wmstrunuse-option":"Do not use",
   "wywatermark-wmstrusername-option":"Uploader Name",
