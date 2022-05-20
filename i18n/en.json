@@ -11,15 +11,19 @@
   "wywatermark-wmposne-option":"right-top",
   "wywatermark-wmposeast-option":"right",
   "wywatermark-wmposse-option":"right-bottom",
-  "wywatermark-wmborder-label":"WM border:",
+  "wywatermark-wmborder-label":";WM border:",
   "wywatermark-wmborder-span":"px",
-  "wywatermark-wmopacity-label":"WM opacity:",
+  "wywatermark-wmopacity-label":";WM opacity:",
   "wywatermark-wmopacity-span":"%(0 to 100)",
   "wywatermark-wmfile-label":"WM file:",
+  "wywatermark-wmfilepc-span":"%(The real size percentage of watermark image)",
   "wywatermark-wmstr-label":"String WM:",
   "wywatermark-wmstrunuse-option":"Do not use",
   "wywatermark-wmstrusername-option":"Uploader Name",
   "wywatermark-wmstrinput-option":"Enter on the right",
   "wywatermark-wmstrstyle-label":"String WM style:",
-  "wywatermark-wmstrstyle-span":"(Format:font-size(percentage of image width),alpha,rotate,string area width(percentage of text width))"
+  "wywatermark-wmfontsizepc-span":"font-size(percentage of image width):",
+  "wywatermark-wmfillalpha-span":"%;alpha:",
+  "wywatermark-wmrotate-span":";rotate:",
+  "wywatermark-wmstrwidthpc-span":";string area width(percentage of text width):"
 }
