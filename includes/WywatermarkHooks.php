@@ -64,7 +64,7 @@ class WywatermarkHooks {
             $wmtext.=Html::rawElement( 'option',['value'=>$row->page_title], $row->page_title );
         }
         $localParser = MediaWikiServices::getInstance()->getParserFactory()->create();
-        $wmtext.=Html::rawElement( 'input', ['id'=>'wmfilepc','name'=>'wmfilepc','value'=>'100'] ) .
+        $wmtext.=Html::rawElement( 'input', ['id'=>'wmfilepc','name'=>'wmfilepc','size'=>'2','value'=>'100'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmfilepc-span' )->text() ) .
         Html::rawElement( 'a', ['href'=>"/index.php?title=Category:$wgWywatermarkCat",
         'title'=>"Category:$wgWywatermarkCat",'target'=>'_blank'],wfMessage( 'wywatermark-wmfilepcafter-span' )->text() ) .
