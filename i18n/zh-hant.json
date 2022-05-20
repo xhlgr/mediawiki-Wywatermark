@@ -17,6 +17,7 @@
   "wywatermark-wmopacity-span":"%",
   "wywatermark-wmfile-label":"水印文件：",
   "wywatermark-wmfilepc-span":"%（實際嵌入寬高與水印圖片寬高的百分比）",
+  "wywatermark-wmfilepcafter-span":"查看圖片",
   "wywatermark-wmstr-label":"文字水印：",
   "wywatermark-wmstrunuse-option":"不使用文字水印",
   "wywatermark-wmstrusername-option":"上傳者用戶名",
