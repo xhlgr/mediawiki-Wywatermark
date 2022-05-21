@@ -55,7 +55,7 @@ class WywatermarkHooks {
         foreach( $res as $row ) {
             array_push($clfrom,$row->cl_from);
         }
-        if(count($clform)>0){//有id才查询否则报错
+        if(count($clfrom)>0){//有id才查询否则报错
             $res = $dbr->select(
                 'page',
                 'page_title',
