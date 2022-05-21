@@ -122,8 +122,8 @@ class WywatermarkHooks {
 		$wmopacity = $wgRequest->getVal( 'wmopacitytext' );
 		//wfDebugLog( 'Wywatermark', '收到提交的参数：位置：'.$wmpos.' );
 		
-		//读入图片文件，这里用url加相对目录位置方式找到图片绝对路径，可能通过FileBackend之类找图片位置才合理，无办法了
-		$filepath = dirname(dirname(dirname(dirname(__FILE__)))).$image->getLocalFile()->url;//文件位置
+		//读入图片文件
+		$filepath = $image->getLocalFile()->getLocalRefPath();//文件本地路径
 		
 		$img = new Imagick($filepath);
         $imageWH = $img->getImageGeometry();//array(width,height)
@@ -134,9 +134,8 @@ class WywatermarkHooks {
     		$wmfile = $wgRequest->getVal( 'wmfile' );
     		$wmfilepc = $wgRequest->getVal( 'wmfilepc' );
 		    //水印文件
-		    $wmfileurl = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $wmfile )->url ;
-    		$wmpath = dirname(dirname(dirname(dirname(__FILE__)))).$wmfileurl;
-    		$wm = new Imagick($wmpath);
+		    $wmfilepath = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $wmfile )->getLocalRefPath() ;
+    		$wm = new Imagick($wmfilepath);
     		$ori_wmWH = $wm->getImageGeometry();
     		$wm->scaleImage($ori_wmWH['width']*$wmfilepc/100,$ori_wmWH['height']*$wmfilepc/100);
             $wmWH = $wm->getImageGeometry();
