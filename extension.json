@@ -16,8 +16,7 @@
 	},
 	"Hooks": {
 		"UploadComplete": "WywatermarkHooks::onUploadComplete",
-		"UploadForm:initial": "WywatermarkHooks::onUploadForm_initial",
-		"FileUpload": "WywatermarkHooks::onFileUpload"
+		"UploadForm:initial": "WywatermarkHooks::onUploadForm_initial"
 	},
 	"config": {
 	    "WywatermarkCat": {
