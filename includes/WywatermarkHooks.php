@@ -55,15 +55,16 @@ class WywatermarkHooks {
         foreach( $res as $row ) {
             array_push($clfrom,$row->cl_from);
         }
-        $res = $dbr->select(
-            'page',
-            'page_title',
-            'page_id in ('.implode(',',$clfrom).')'
-        );//获得页面标题
-        foreach( $res as $row ) {
-            $wmtext.=Html::rawElement( 'option',['value'=>$row->page_title], $row->page_title );
+        if(count($clform)>0){//有id才查询否则报错
+            $res = $dbr->select(
+                'page',
+                'page_title',
+                'page_id in ('.implode(',',$clfrom).')'
+            );//获得页面标题
+            foreach( $res as $row ) {
+                $wmtext.=Html::rawElement( 'option',['value'=>$row->page_title], $row->page_title );
+            }
         }
-        $localParser = MediaWikiServices::getInstance()->getParserFactory()->create();
         $wmtext.=Html::rawElement( 'input', ['id'=>'wmfilepc','name'=>'wmfilepc','size'=>'2','value'=>'100'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmfilepc-span' )->text() ) .
         Html::rawElement( 'a', ['href'=>"/index.php?title=Category:$wgWywatermarkCat",
