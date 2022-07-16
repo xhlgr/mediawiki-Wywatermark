@@ -16,8 +16,8 @@
   "wywatermark-wmopacity-label":";WM opacity:",
   "wywatermark-wmopacity-span":"%(0 to 100)",
   "wywatermark-wmfile-label":"WM file:",
-  "wywatermark-wmfilepc-span":"%(The real size percentage of watermark image)",
-  "wywatermark-wmfilepcafter-span":"View the watermark image",
+  "wywatermark-wmfilepc-span":"%(The watermark real width percentage of image width)",
+  "wywatermark-wmfilepcafter-span":"View the images available for selection",
   "wywatermark-wmstr-label":"String WM:",
   "wywatermark-wmstrunuse-option":"Do not use",
   "wywatermark-wmstrusername-option":"Uploader Name",
@@ -25,6 +25,6 @@
   "wywatermark-wmstrstyle-label":"String WM style:",
   "wywatermark-wmfontsizepc-span":"font-size(percentage of image width):",
   "wywatermark-wmfillalpha-span":"%;alpha:",
-  "wywatermark-wmrotate-span":";rotate:",
+  "wywatermark-wmrotate-span":"%;rotate:",
   "wywatermark-wmstrwidthpc-span":";string area width(percentage of text width):"
 }
