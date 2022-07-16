@@ -16,8 +16,8 @@
   "wywatermark-wmopacity-label":"；水印不透明度",
   "wywatermark-wmopacity-span":"%",
   "wywatermark-wmfile-label":"水印文件：",
-  "wywatermark-wmfilepc-span":"%（實際嵌入寬高與水印圖片寬高的百分比）",
-  "wywatermark-wmfilepcafter-span":"查看圖片",
+  "wywatermark-wmfilepc-span":"%（實際嵌入寬度與被嵌入圖片寬度的百分比）",
+  "wywatermark-wmfilepcafter-span":"查看可選擇的圖片",
   "wywatermark-wmstr-label":"文字水印：",
   "wywatermark-wmstrunuse-option":"不使用文字水印",
   "wywatermark-wmstrusername-option":"上傳者用戶名",
@@ -25,6 +25,6 @@
   "wywatermark-wmstrstyle-label":"文字水印樣式：",
   "wywatermark-wmfontsizepc-span":"字體大小（圖片寬度的百分比）：",
   "wywatermark-wmfillalpha-span":"%；透明度：",
-  "wywatermark-wmrotate-span":"；旋轉角度：",
+  "wywatermark-wmrotate-span":"%；旋轉角度：",
   "wywatermark-wmstrwidthpc-span":"；間距（文字寬度的百分比）："
 }
