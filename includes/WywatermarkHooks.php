@@ -65,7 +65,7 @@ class WywatermarkHooks {
                 $wmtext.=Html::rawElement( 'option',['value'=>$row->page_title], $row->page_title );
             }
         }
-        $wmtext.=Html::rawElement( 'input', ['id'=>'wmfilepc','name'=>'wmfilepc','size'=>'2','value'=>'100'] ) .
+        $wmtext.=Html::rawElement( 'input', ['id'=>'wmfilepc','name'=>'wmfilepc','size'=>'2','value'=>'20'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmfilepc-span' )->text() ) .
         Html::rawElement( 'a', ['href'=>"/index.php?title=Category:$wgWywatermarkCat",
         'title'=>"Category:$wgWywatermarkCat",'target'=>'_blank'],wfMessage( 'wywatermark-wmfilepcafter-span' )->text() ) .
@@ -97,7 +97,7 @@ class WywatermarkHooks {
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmfontsizepc-span' )->text() ) .
         Html::rawElement( 'input', ['id'=>'wmfontsizepc','name'=>'wmfontsizepc','size'=>'2','value'=>'3'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmfillalpha-span' )->text() ) .
-        Html::rawElement( 'input', ['id'=>'wmfillalpha','name'=>'wmfillalpha','size'=>'2','value'=>'0.08'] ) .
+        Html::rawElement( 'input', ['id'=>'wmfillalpha','name'=>'wmfillalpha','size'=>'2','value'=>'8'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmrotate-span' )->text() ) .
         Html::rawElement( 'input', ['id'=>'wmrotate','name'=>'wmrotate','size'=>'2','value'=>'-45'] ) .
         Html::rawElement( 'span', [], wfMessage( 'wywatermark-wmstrwidthpc-span' )->text() ) .
@@ -117,9 +117,9 @@ class WywatermarkHooks {
 			return true;//没有文件则结束
 		}
 
-		$wmpos = $wgRequest->getVal( 'wmpos' );
-		$wmborder = $wgRequest->getVal( 'wmbordertext' );
-		$wmopacity = $wgRequest->getVal( 'wmopacitytext' );
+		$wmpos = $wgRequest->getVal( 'wmpos' );//位置
+		$wmborder = $wgRequest->getVal( 'wmbordertext' );//边距
+		$wmopacity = $wgRequest->getVal( 'wmopacitytext' );//不透明度
 		//wfDebugLog( 'Wywatermark', '收到提交的参数：位置：'.$wmpos.' );
 		
 		//读入图片文件
@@ -131,13 +131,13 @@ class WywatermarkHooks {
 		//图片水印处理
 		//不是不加图片水印、边距是正数、不透明度是0至100则加水印
 		if ( $wmpos!='wmunuse' && $wmborder>=0 && $wmopacity>=0 && $wmopacity<=100) {
-    		$wmfile = $wgRequest->getVal( 'wmfile' );
-    		$wmfilepc = $wgRequest->getVal( 'wmfilepc' );
+    		$wmfile = $wgRequest->getVal( 'wmfile' );//文件路径
+    		$wmfilepc = $wgRequest->getVal( 'wmfilepc' );//实际嵌入时宽与原图宽度的百分比
 		    //水印文件
 		    $wmfilepath = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $wmfile )->getLocalRefPath() ;
     		$wm = new Imagick($wmfilepath);
     		$ori_wmWH = $wm->getImageGeometry();
-    		$wm->scaleImage($ori_wmWH['width']*$wmfilepc/100,$ori_wmWH['height']*$wmfilepc/100);
+    		$wm->scaleImage($imageWH['width']*$wmfilepc/100,$imageWH['width']*$wmfilepc/100*$ori_wmWH['height']/$ori_wmWH['width']);//设置实际嵌入时宽高为原图宽度的百分比
             $wmWH = $wm->getImageGeometry();
             
             if($imageWH['width']>$wmWH['width']+$wmborder && $imageWH['height']>$wmWH['height']+$wmborder){
@@ -208,15 +208,15 @@ class WywatermarkHooks {
     		$fillalpha=$wgRequest->getVal('wmfillalpha');
     		$rotate=$wgRequest->getVal('wmrotate');
     		$strwidthpc=$wgRequest->getVal('wmstrwidthpc');
-    		if($fillalpha<0||$fillalpha>1){//透明度超出范围设为默认值0.08
-		        $fillalpha=0.08;
+    		if($fillalpha<0||$fillalpha>100){//透明度超出范围设为默认值8
+		        $fillalpha=8;
 		    }
             $draw = new ImagickDraw();
             $draw->setFillColor('white');
             $draw->setFont(dirname(dirname(__FILE__)).'/resources/font/SourceHanSansCN-Regular.ttf');//思源黑体常规
             $fontsize=$imageWH['width']*$fontsizepc/100;//按宽度百分比设置字体大小
             $draw->setFontSize($fontsize);
-            $draw->setFillAlpha($fillalpha);
+            $draw->setFillAlpha($fillalpha/100);
             $strwidth=$fontsize*mb_strlen($wmstrtext)*$strwidthpc/100;//按字体文本宽度百分比计算间距
             //计算起点，先分正负求旋转位置，再确定起点
             if($rotate>=0){
